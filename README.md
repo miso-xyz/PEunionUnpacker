@@ -3,7 +3,7 @@ Manual Unpacker for PEunion (tested on 3.1.5), kinda unstable, can be improved a
 
 The main application works, you can successfully unpack & decrypt strings from protected applications by PEunion
 
-Reading the docummentation is highly recommended before/while using the application.
+Reading the documentation is highly recommended before/while using the application.
 # Tools provided in the app
 * Info about the protected file
   * Protected File(s) name
