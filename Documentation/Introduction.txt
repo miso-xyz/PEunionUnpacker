@@ -1,0 +1,13 @@
+﻿Welcome to the PEunion Unpacker documentation, this documentation will be about how apps by PEunion works & how PEunion Obfuscation works.
+
+This documentation references a lot the manual deobfuscation ive done on a 
+
+Tools Recommended:
+- dnSpy
+
+Keywords:
+RE: Reverse Engineer
+
+Credits:
+- misonothx | Wrote all of the documentation you're currently reading & made the PEunion Unpacker
+- miyako | shes kinda pepega don't mind her

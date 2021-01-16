@@ -1,0 +1,57 @@
+﻿An application packed by PEunion will look as such:
+
+(the following is based on the manual deobfuscated file ive provided on the github repo)
+
+ProtectedFile.exe
+|- ProtectedFile.exe
+   |- - (the namespace has no name)
+     |- <Module> (unused)
+	 |- Main (this is where all of the code resides)
+	 |- MsgBoxVariables (has all of the variables to display a messagebox (only used if you have setted up a messagebox in PEunion))
+	 |- PackedFilesVariables (has all of the variables that will be used later in the app if it contains a packed application)
+	 |- UrlDownloadVariables (has all of the variables that will be used later in the app if it contains a download link)
+
+	 Note: all of the variables are empty, their data is set once Main..cctor has been executed
+
+Win32 Imports:
+kernel32.dll | GetModuleHandle
+kernel32.dll | DeleteFile
+
+Function ByteDecryptSymmetricRijndaelAlg() - Used to decrypt application | Algorithm used: Rijndael (Symmetric)
+|- Copies the first 16 bytes of the inputed data (this is the key)
+|- Decrypts the data (starting from bytes 16 upto Input Length - 16) and returns it
+
+Function DecompressByteArray() - Used to decompress application | Used: GZipStream
+|- Gets the size of the uncompressed data by getting the first 4 bytes of the inputted data and reading it as a Int32 integer, then it as the size of the outputted array (which contains the decompressed data)
+|- Copies the decompress data onto the output array, then returns that same array
+
+Sub Main.Main() - Entrypoint
+|- Tries to delete ":Zone.Identifier" (used to prevent other "Do you want to run this file" dialogs while trying to load the protected application
+|- Checks if the process can find "SbieDll" in the loaded modules, this prevents from loading the protected application in Sandboxie
+|- Counts the number of processes running named "Wireshark"
+   |- If it is lower/equal to 0, it then searches for "The Wireshark Network Analyzer" in every processes window title, if an exception occurs, the checksum has been passed
+   |- Otherwise, the checksum has been failed
+|- The checksum for Wireshark is present twice, however this time it is "process monitor -" that is searched in every processes window title, if an exception occurs, the checksum has been passed
+|- The following checksum is as follows
+   |- Gets current TickCount
+   |- Gets current time (DateTime.Now)
+   |- Sleeps for 0.5s
+   |- Gets current TickCount
+   |- Gets current time (DateTime.Now)
+   |- Compares both tickcounts & dates, if atleast 0.45s went by, the checksum has been passed (this prevents emulator usage)
+|- After, the application checks if all checksums have been passed, if so, the application will launch, otherwise, the application will close.
+
+Sub Main.StartApp(fullPath, IsFileHiddenOrSystem, pathType, executionParams, UseRunas, arguments, app)
+|- Gets the value of pathType and compares it with the following
+   |
+   |- If pathType is 1, the extraction folder will be in the %temp% directory
+   |- If pathType is 2, the extraction folder will be in the download folder (it gets the folder path via registry)
+   |- If pathType is 3, the extraction folder will be on the User's desktop
+   |- If pathType is 4, the extraction folder will be on the User's Personal folder (C:/Users/<Username>/)
+   |- If pathType is 5, the extraction folder will be in the protected application's folder
+|- If a file with the same name is present in the extraction directory, it will be deleted
+|- It now extracts the packed application in the extraction directory
+|- If IsFileHiddenOrSystem is True, it will apply set the attributes of the file to Hidden or/and System
+|- If executionParams is more/equal to 1, it will start the extracted application with the arguments that has been hardcoded
+   |- If executionParams is more/equal to 2, it will halt & wait until the extracted application is closed
+       |- If executionParams is more/equal to 3, it will then delete the extracted application

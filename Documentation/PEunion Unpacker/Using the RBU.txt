@@ -1,0 +1,15 @@
+﻿The RBU (Raw Bytes Unpacker) is a tool present in misonothx's PEunion Unpacker that allows a protected application to be unpacked.
+
+Q: Where can i find the protected application's bytes
+A: On the tested version of PEunion (the one that is compatible with the unpacker), it is located at "Main..cctor" (this is where it is on the manually
+deobfuscated example, this will differ depending on the packed application, to easily find it, you will need to find the main type, which is where all of
+the code of the protected application is). You will have to select the whole section of bytes and copy it to the RBU textbox (you will have to start the
+selection from the first byte and end it at the last one, no manual formating is required. An easy way to select it is by using the C# language on dnspy,
+it will be much easier where you are while selecting.)
+
+If the RBU successfully processed the given data, you will be asked to save the data as a file.
+If the RBU fails to process the given data, make sure you've selected the bytes correctly & selected the correct settings. if your selection & settings
+are correct, this might mean that the unpacker is incompatible with the given data.
+
+TIP: make sure you have the protected application you want to unpack as an input file on the main menu of the application, this will allow you to use the
+"Auto" feature, meaning you will not have to configure the RBU at all, you will just need to enter the protected bytes.

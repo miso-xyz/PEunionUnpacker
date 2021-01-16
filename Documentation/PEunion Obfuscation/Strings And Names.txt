@@ -1,0 +1,15 @@
+﻿Variables names, whether its alphanumeric or special cannot be RE'd, this is due to them being randomised.
+
+------------------------------------------------------------------------------------------------------------
+
+Strings can be RE'd using the given Decryptor on the PEunion Unpacker or you can just use the one present in any packed application, its the same algorithm
+
+They use a XOR formula which is as follows:
+
+Actual VB.NET Formula: New String(encryptedString.Substring(1).[Select](Function(c As Char) c Xor CChar(CByte(encryptedString(0)))).ToArray())
+
+The function gets the data (which starts at the 2nd character, then continues until the string ends) and XOR's it with the first character of the string
+heres an example:
+
+"¤ÔÖËÇÁ××ÉËÊÍÐËÖ" = "process monitor -" | "ÔÖËÇÁ××ÉËÊÍÐËÖ" is XOR'd with "¤"
+"Ë¤ÔÖËÇÁ××ÉËÊÍÐËÖ" = "o" | "¤ÔÖËÇÁ××ÉËÊÍÐËÖ" is XOr'd with "Ë"

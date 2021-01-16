@@ -1,0 +1,11 @@
+﻿Using the String Decryptor
+
+To decrypt a String, you will just need to copy the encrypted string into it and it should be decrypted, if you're using VB.NET as your language on dnSpy
+and you see "ChrW" instructions, you can insert the value in the ChrW Numerical Bow & click add, the character will then be entered.
+
+Alternatively, you can use the Character Table to manually select the characters you want by double clicking on them.
+
+PS: You can also encrypt your own strings with it, however it is not recommended, knowing how the String encryptor works is usefull and can be learned about
+on the "Strings And Names" documentation file
+
+PS 2: To make sure all of the textboxes are clear, use the "Clear" button
