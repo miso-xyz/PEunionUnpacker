@@ -1,3 +1,6 @@
+# Important information
+I've made a better extractor & cleaner for PEunion, please click <a href="https://github.com/miso-xyz/PEXTUnion">here</a> to see the repository
+
 # PEunionUnpacker
 Manual Unpacker for PEunion (tested on 3.1.5), kinda unstable, can be improved a lot more
 
